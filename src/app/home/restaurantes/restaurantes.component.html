@@ -1,0 +1,14 @@
+<h2 class="mat-h2">Restaurantes</h2>
+<div fxLayout="column" fxLayoutAlign="center "> 
+    <mat-spinner *ngIf="loading"></mat-spinner>
+    <mat-grid-list [cols]="numColunas()" rowHeight="2:1" gutterSize="10px" *ngIf="!loading">
+        <a *ngFor="let restaurante of restaurantes" [routerLink]="['/restaurante/' + restaurante.idUsuario ]">
+            <mat-grid-tile class="mat-elevation-z2">
+                <p>{{restaurante.nomeFantasia}}</p>
+                
+                <img *ngIf="restaurante.logotipo" [src]="restaurante.logotipo">
+                <p></p>
+            </mat-grid-tile>
+        </a> 
+    </mat-grid-list>
+</div>

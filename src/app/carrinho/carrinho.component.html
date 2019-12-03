@@ -1,0 +1,77 @@
+<div fxLayout="column">
+    <div class="reader" fxLayout="row">
+        <div *ngIf="localEntrega">
+            <span class="mat-h1">Seu carrinho em {{restaurante.nomeFantasia}}</span><br>
+            <span class="mat-h3">{{localEntrega.local}}</span>
+        </div>
+        
+        <span class="mat-h1" *ngIf="!localEntrega">Seu carrinho está vazio</span>
+        <button mat-icon-button fxHide.gt-xs [mat-dialog-close]><mat-icon>close</mat-icon></button>
+    </div>
+    <div mat-dialog-content *ngIf="localEntrega">
+        <span class="mat-h2">Itens do Pedido</span>
+        <mat-divider></mat-divider>
+        <div class="itens-pedido" fxLayout="column">
+            <div class="item-pedido" *ngFor="let item of pedido.pratos">
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div>
+                        <span>{{item.prato.nome}}</span><br>
+                        <small>{{item.prato.valor}}</small>
+                    </div>
+                    <div>
+                        <button mat-icon-button (click)="removerPrato(item.prato)"><mat-icon>remove</mat-icon></button>
+                        <span>{{item.quantidade}}</span>
+                        <button mat-icon-button (click)="adicionarPrato(item.prato)"><mat-icon>add</mat-icon></button>
+                    </div>
+                </div>
+                
+            </div>
+            <mat-divider></mat-divider>
+            <div class="subtotal">
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    
+                        <span class="mat-body-2">Total de Itens</span>
+                    <div>
+                        <span>valor total</span>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div>
+                        <span class="mat-body-2">Valor total</span>
+                    </div>    
+                    <div>
+                        <span>valor total</span>
+                    </div>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+        </div>
+        <div fxLayout="column">
+            <mat-form-field appearance="outline">
+                <mat-label>Forma de Pagamento</mat-label>
+                <mat-select>
+                    <mat-option value="dinheiro">
+                        <span>Dinheiro</span>
+                    </mat-option>
+                    <mat-option value="cartao">
+                        <span>Cartão de Crédito</span>
+                    </mat-option>
+                    <mat-option value="maquininha">
+                        <span>Trazer Maquininha</span>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-actions class="actions" fxLayout="column">
+        <mat-divider></mat-divider>
+        <div *ngIf="restaurante" fxLayout="row" fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="center none" fxLayoutGap="10px">
+            <button mat-button (click)="cancelarPedido()">Cancelar Pedido</button>
+            <button mat-button color="primary">Ver Cardápio</button>
+            <button mat-button color="primary">Finalizar Pedido</button>
+        </div>
+        <div *ngIf="!restaurante" fxLayout="row" fxLayoutAlign="center center">
+            <button mat-button [mat-dialog-close]>Voltar</button>
+        </div>
+    </div>
+</div>

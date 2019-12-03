@@ -1,0 +1,7 @@
+<div fxLayout="column" fxFlexFill>
+    <app-header (novoLocal)="mudaLocal($event)" #header></app-header>
+    <div class="pagina" fxFlex>
+        <router-outlet></router-outlet>
+    </div>
+    <app-nav fxHide.gt-xs></app-nav>
+</div>

@@ -1,0 +1,10 @@
+.background{
+    height: 100vh;
+}
+.logo {
+    height: 76px;
+    background-image: url('../../assets/logo2.png');
+    background-clip: content-box;
+    background-position: center;
+    background-size: contain;
+}

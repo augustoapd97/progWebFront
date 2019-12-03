@@ -1,0 +1,14 @@
+mat-drawer, mat-drawer-container{
+    background: none;
+
+    mat-drawer{
+        width: 250px;
+        margin-left: 20px;
+    }
+}
+mat-drawer-content{
+    padding: 3px
+}
+.pratos{
+    overflow: auto;
+}

@@ -1,0 +1,49 @@
+
+<mat-drawer-container fxFlexFill>
+    
+    <mat-drawer-content>
+        <div fxLayout="row" fxLayoutAlign="space-between  " fxLayout.lt-md="column" fxLayoutGap="10px">
+            <mat-card>
+                <mat-spinner *ngIf="loadingRestaurante"></mat-spinner>
+                <mat-card-header *ngIf="!loadingRestaurante">
+                    <mat-card-title>{{restaurante.nomeFantasia}}</mat-card-title>
+                    <mat-card-subtitle></mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content *ngIf="!loadingRestaurante">
+                
+                </mat-card-content>
+            </mat-card>
+            <mat-card fxFlex>
+                <mat-spinner *ngIf="loadingItens"></mat-spinner>
+                <mat-card-header *ngIf="!loadingItens">
+                    <mat-card-title>Pratos Disponíveis</mat-card-title>
+                    <mat-card-subtitle *ngIf="localEntrega">para entrega em {{localEntrega.local}}</mat-card-subtitle>
+                </mat-card-header>
+
+                <div class="pratos" *ngIf="!loadingItens">
+                    <mat-nav-list>
+                        <div *ngFor="let secao of cardapio()">
+                            <h1 matSubheader [id]="secao.categoria.id">{{secao.categoria.nome}}</h1>
+                            <mat-list-item (click)="adicionarNoCarrinho(item)" *ngFor="let item of secao.itens">
+                                <img matListIcon src="" *ngIf="item.imagem" style="background: black;">
+                                <h1 matLine>{{item.prato.nome}}</h1>
+                                <h2 matLine>{{item.prato.descricao}}</h2>
+                                <h3 matLine>R$ {{item.prato.valor}}</h3>
+                                <small matLine class="mat-small">Tempo de Preparo: {{item.prato.tempoPreparo}} minutos</small>
+                                <mat-icon>add</mat-icon>
+                            </mat-list-item>
+                        </div>
+                        
+                    </mat-nav-list>
+                </div>
+                    
+            </mat-card>
+
+        </div>
+
+    </mat-drawer-content>
+
+    <mat-drawer mode="side" position="end" [opened]="rs.isLarge">Drawer content</mat-drawer>
+    
+    
+</mat-drawer-container>

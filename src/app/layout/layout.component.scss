@@ -1,0 +1,15 @@
+.pagina {
+    overflow: auto;
+    padding: 10px;
+}
+app-header, app-nav{
+    position: sticky;
+    z-index: 1000;
+}
+app-header{
+    top: 0;
+}
+
+app-nav{
+    bottom: 0;
+}
