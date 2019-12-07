@@ -9,7 +9,6 @@ import { MaterialModule } from './material/material.module';
 import { PerfilModule } from './perfil/perfil.module';
 import { NavComponent } from './layout/nav/nav.component';
 import { HeaderComponent } from './layout/header/header.component';
-import { BuscaModule } from './busca/busca.module';
 import { HomeModule } from './home/home.module';
 import { CarrinhoModule } from './carrinho/carrinho.module';
 import { CardapioModule } from './cardapio/cardapio.module';
@@ -32,7 +31,6 @@ import { ErrorInterceptor } from './_helpers/error-interceptor';
     BrowserAnimationsModule,
     MaterialModule,
     PerfilModule,
-    BuscaModule,
     HomeModule,
     CarrinhoModule,
     CardapioModule,

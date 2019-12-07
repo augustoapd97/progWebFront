@@ -5,6 +5,7 @@ import { CarrinhoService } from 'src/app/_services/carrinho.service';
 import { LocalEntrega } from 'src/app/_models/local-entrega';
 import { Router } from '@angular/router';
 import { LocaisEntregaService } from 'src/app/_services/locais-entrega.service';
+import { PerfilComponent } from 'src/app/perfil/perfil.component';
 
 @Component({
   selector: 'app-header',
@@ -49,6 +50,10 @@ export class HeaderComponent implements OnInit {
 
   abrirCarrinho() {
     this.dialog.open(CarrinhoComponent);
+  }
+  
+  abrirPerfil() {
+    this.dialog.open(PerfilComponent);
   }
 
 }

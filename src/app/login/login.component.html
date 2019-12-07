@@ -8,12 +8,12 @@
             <form [formGroup]="loginForm" fxLayout="column" fxLayoutAlign="start stretch"> 
                 <mat-form-field>
                     <mat-label>E-mail</mat-label>
-                    <input matInput formControlName="email">
+                    <input matInput formControlName="email" type="email">
                     <mat-error>Preencha o seu e-mail</mat-error>
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Senha</mat-label>
-                    <input matInput formControlName="senha">
+                    <input matInput formControlName="senha" type="password">
                     <mat-error>Preencha a sua senha</mat-error>
                 </mat-form-field>
             </form>

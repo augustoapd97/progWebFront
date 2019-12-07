@@ -6,6 +6,8 @@ import { Pedido } from '../_models/pedido';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Prato } from '../_models/prato';
 import { ItemCardapio } from '../_models/item-cardapio';
+import { PedidoService } from './pedido.service';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -18,6 +20,8 @@ export class CarrinhoService {
   private localEntrega: LocalEntrega;
 
   constructor(
+    private pedidoService: PedidoService,
+    private router: Router,
     private _snackBar: MatSnackBar
   ) {
     const carrinho = JSON.parse(localStorage.getItem('carrinho'));
@@ -31,6 +35,13 @@ export class CarrinhoService {
   get quantidadeItens() {
     if (!this.localEntrega) return;
     return this.pedido.pratos.map(p => p.quantidade).reduce((prev, curr) => {
+      return curr += prev
+    });
+  }
+
+  get valorTotal() {
+    if (!this.localEntrega) return;
+    return this.pedido.pratos.map(p => p.prato.valor * p.quantidade ).reduce((prev, curr) => {
       return curr += prev
     });
   }
@@ -122,7 +133,24 @@ export class CarrinhoService {
     localStorage.removeItem('carrinho');
   }
 
-  fecharPedido() {
+  fecharPedido(troco: number, idCartao: number) {
+
+    this.pedido.troco = troco;
+    this.pedido.idCartao = idCartao;
+
+    console.log(this.pedido.troco);
+    console.log(this.pedido.idCartao);
+    this.pedidoService.postPedido(this.pedido).subscribe(
+      res => {
+        if (res) {
+          this._snackBar.open('Pedido realizado com sucesso!', 'ok', {duration: 4000 });
+          this.router.navigateByUrl('');
+          this.cancelarPedido();
+        } else {
+          this._snackBar.open('Falha ao efetuar o pedido', 'ok', {duration: 4000 });
+        }
+      }
+    );
     
   }
 

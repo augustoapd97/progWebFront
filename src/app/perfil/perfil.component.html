@@ -1,0 +1,57 @@
+<div>
+    <div class="reader" fxLayout="row">
+        <div>
+            <span class="mat-h1">Bem vindo, {{usuario.nome}}</span><br>
+        </div>
+        <button mat-icon-button fxHide.gt-xs [mat-dialog-close]><mat-icon>close</mat-icon></button>
+    </div>
+    <div>
+        <div>
+
+        </div>
+        <div *ngIf="pedido">
+            <span class="mat-h2">Você tem um pedido em andamento</span>
+            <span class="mat-h3">Itens do Pedido</span>
+            <mat-divider></mat-divider>
+            <div class="itens-pedido" fxLayout="column">
+                <div class="item-pedido" *ngFor="let item of pedido.pratos">
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                        <div>
+                            <span>{{item.prato.nome}}</span><br>
+                        </div>
+                        <div>
+                            <span>{{item.quantidade}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <span class="mat-h3">O que deseja fazer?</span>
+            <mat-nav-list>
+                <mat-list-item>
+                    <mat-icon>list</mat-icon>
+                    Ver pedidos
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon>settings_applications</mat-icon>
+                    Alterar dados
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon>send</mat-icon>
+                    Entregar
+                </mat-list-item>
+                <mat-list-item (click)="logout()">
+                    <mat-icon>logout</mat-icon>
+                    Logout
+                </mat-list-item>
+            </mat-nav-list>
+        </div>
+
+
+    <div mat-dialog-actions class="actions" fxLayout="column">
+        <div *ngIf="!restaurante" fxLayout="row" fxLayoutAlign="center center">
+            <button mat-button [mat-dialog-close]>Voltar</button>
+        </div>
+    </div>
+</div>

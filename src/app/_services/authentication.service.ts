@@ -42,9 +42,9 @@ export class AuthenticationService {
           localStorage.setItem('authorization', token);
           this.currentTokenSubject.next(token);
 
-          this.http.get('http://localhost:8080/usuarios', {params: { email: resposta.headers.get('username') }, observe: 'response'}).subscribe(
+          return this.http.get('http://localhost:8080/usuarios', {params: { email: resposta.headers.get('username') }, observe: 'response'}).subscribe(
             resposta => {
-              const user = resposta.body;
+              const user = <Usuario>resposta.body;
               localStorage.setItem('currentUser', JSON.stringify(user));
               this.currentUserSubject.next(user);
             }

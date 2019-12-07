@@ -32,7 +32,7 @@
                     
                         <span class="mat-body-2">Total de Itens</span>
                     <div>
-                        <span>valor total</span>
+                        <span>{{quantidadeItens}}</span>
                     </div>
                 </div>
                 <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -40,7 +40,7 @@
                         <span class="mat-body-2">Valor total</span>
                     </div>    
                     <div>
-                        <span>valor total</span>
+                        <span>{{valorTotal}}</span>
                     </div>
                 </div>
             </div>
@@ -49,17 +49,29 @@
         <div fxLayout="column">
             <mat-form-field appearance="outline">
                 <mat-label>Forma de Pagamento</mat-label>
-                <mat-select>
+                <mat-select #formaPagamento (selectionChange)="zerarPagamento()">
                     <mat-option value="dinheiro">
                         <span>Dinheiro</span>
                     </mat-option>
-                    <mat-option value="cartao">
+                    <mat-option value="cartao" *ngIf="cartoes && cartoes.length > 0">
                         <span>Cartão de Crédito</span>
                     </mat-option>
                     <mat-option value="maquininha">
                         <span>Trazer Maquininha</span>
                     </mat-option>
                 </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" *ngIf="formaPagamento.value === 'cartao'">
+                <mat-label>Selecione o Cartão</mat-label>
+                <mat-select [(ngModel)]="idCartao">
+                    <mat-option *ngFor="let cartao of cartoes" [value]="cartao.id">
+                        <span>{{cartao.nome}} - {{cartao.codigo}}</span>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" *ngIf="formaPagamento.value === 'dinheiro'">
+                <mat-label>Informe o troco necessário</mat-label>
+                <input matInput type="number" [(ngModel)]="troco" (input)="getroco()">
             </mat-form-field>
         </div>
     </div>
@@ -68,7 +80,7 @@
         <div *ngIf="restaurante" fxLayout="row" fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="center none" fxLayoutGap="10px">
             <button mat-button (click)="cancelarPedido()">Cancelar Pedido</button>
             <button mat-button color="primary">Ver Cardápio</button>
-            <button mat-button color="primary">Finalizar Pedido</button>
+            <button mat-button color="primary" (click)="fecharPedido()">Finalizar Pedido</button>
         </div>
         <div *ngIf="!restaurante" fxLayout="row" fxLayoutAlign="center center">
             <button mat-button [mat-dialog-close]>Voltar</button>
